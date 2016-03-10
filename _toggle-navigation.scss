@@ -8,6 +8,7 @@
     'height': null,
     'menu': null,
     'speed': 0.4s,
+    'until': null,
   ), $args);
 
   @if not map-get($settings, 'menu') {
@@ -20,63 +21,71 @@
 
   $speed: map-get($settings, 'speed');
 
-  height: map-get($settings, 'height');
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  transition: height $speed cubic-bezier(0, 0, 0, 1);
-
-  .navigation-open & {
-    height: 100%;
+  @if map-get($settings, 'until') {
+    $media-query: 'max-width: ' + map-get($settings, 'until');
+  } @else {
+    $media-query: 'min-width: 0px';
   }
 
-  #{map-get($settings, 'menu')} {
-    bottom: 0;
-    left: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding-bottom: map-get($settings, 'bottom-space');
+  @include leuke-mixin($until) {
+    height: map-get($settings, 'height');
+    overflow: hidden;
     position: absolute;
-    top: map-get($settings, 'height');
-    transition: visibility 0s linear ($speed * 2);
-    visibility: hidden;
+    top: 0;
+    transition: height $speed cubic-bezier(0, 0, 0, 1);
 
     .navigation-open & {
-      transition-delay: 0s;
-      visibility: visible;
+      height: 100%;
     }
 
-    @if map-get($settings, 'item') {
-      $max-items: 10;
+    #{map-get($settings, 'menu')} {
+      bottom: 0;
+      left: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding-bottom: map-get($settings, 'bottom-space');
+      position: absolute;
+      top: map-get($settings, 'height');
+      transition: visibility 0s linear ($speed * 2);
+      visibility: hidden;
 
-      #{map-get($settings, 'item')} {
-        opacity: 0;
-        transform: scale(1.1) translateY(-20px);
-        transition: opacity $speed ease-out, transform $speed ease-out;
+      .navigation-open & {
+        transition-delay: 0s;
+        visibility: visible;
+      }
 
-        @for $i from 1 through $max-items {
-          $base-delay: ($speed / 4);
+      @if map-get($settings, 'item') {
+        $max-items: 10;
 
-          &:nth-child(#{$i}) {
-            $item-delay: $base-delay + ($i * ($speed / 8));
-            transition-delay: $item-delay, $item-delay;
+        #{map-get($settings, 'item')} {
+          opacity: 0;
+          transform: scale(1.1) translateY(-20px);
+          transition: opacity $speed ease-out, transform $speed ease-out;
+
+          @for $i from 1 through $max-items {
+            $base-delay: ($speed / 4);
+
+            &:nth-child(#{$i}) {
+              $item-delay: $base-delay + ($i * ($speed / 8));
+              transition-delay: $item-delay, $item-delay;
+            }
           }
         }
-      }
 
-      .navigation-open & #{map-get($settings, 'item')} {
-        opacity: 1;
-        transform: none;
+        .navigation-open & #{map-get($settings, 'item')} {
+          opacity: 1;
+          transform: none;
+        }
       }
     }
-  }
 
-  @at-root {
-    body {
-      margin-top: map-get($settings, 'height');
+    @at-root {
+      body {
+        margin-top: map-get($settings, 'height');
 
-      &.navigation-open {
-        overflow-y: hidden;
+        &.navigation-open {
+          overflow-y: hidden;
+        }
       }
     }
   }
