@@ -1,0 +1,71 @@
+/// Full screen toggle navigation
+///
+/// @param {Map} $args - Settings
+@mixin toggle-navigation($args: ()) {
+  $settings: map-merge((
+    'item': null,
+    'height': null,
+    'menu': null,
+    'speed': 0.4s,
+  ), $args);
+
+  @if not map-get($settings, 'menu') {
+    @error '`menu` should be set in toggle-navigation() arguments.';
+  }
+
+  @if not map-get($settings, 'height') {
+    @error '`height` should be set in toggle-navigation() arguments.';
+  }
+
+  height: map-get($settings, 'height');
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transition: height map-get($settings, 'speed') cubic-bezier(0, 0, 0, 1);
+
+  &.navigation-open {
+    height: 100%;
+  }
+
+  #{map-get($settings, 'menu')} {
+    left: 0;
+    position: absolute;
+    transition: visibility 0s linear 1s;
+    visibility: hidden;
+
+    &.navigation-open {
+      transition-delay: 0s;
+      visibility: visible;
+    }
+
+    @if map-get($settings, 'item') {
+      $maxItems: 10;
+
+      #{map-get($settings, 'item')} {
+        opacity: 0;
+        transform: scale(1.1) translateY(-20px);
+        transition: opacity map-get($settings, 'speed') ease-out, transform map-get($settings, 'speed') ease-out;
+
+        @for $i from 1 through $maxItems {
+          $baseDelay: (map-get($settings, 'speed') / 4);
+
+          &:nth-child(#{$i}) {
+            $itemDelay: $baseDelay + ($i * 50ms);
+            transition-delay: $itemDelay, $itemDelay;
+          }
+        }
+      }
+
+      &.navigation-open #{map-get($settings, 'item')} {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+
+  @at-root {
+    body {
+      margin-top: map-get($settings, 'height');
+    }
+  }
+}
