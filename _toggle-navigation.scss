@@ -20,6 +20,10 @@
   }
 
   $speed: map-get($settings, 'speed');
+  $wp-admin-bar: (
+    0: 46px,
+    782px: 32px,
+  );
 
   @if map-get($settings, 'until') {
     $media-query: 'max-width: ' + map-get($settings, 'until');
@@ -33,6 +37,14 @@
     position: absolute;
     top: 0;
     transition: height $speed cubic-bezier(0, 0, 0, 1);
+
+    .admin-bar & {
+      @each $width, $height in $wp-admin-bar {
+        @media(min-width: $width) {
+          top: $height;
+        }
+      }
+    }
 
     .navigation-open & {
       height: 100%;
