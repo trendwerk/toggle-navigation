@@ -25,7 +25,7 @@
   top: 0;
   transition: height $speed cubic-bezier(0, 0, 0, 1);
 
-  &.navigation-open {
+  .navigation-open & {
     height: 100%;
   }
 
@@ -35,7 +35,7 @@
     transition: visibility 0s linear ($speed * 2);
     visibility: hidden;
 
-    &.navigation-open {
+    .navigation-open & {
       transition-delay: 0s;
       visibility: visible;
     }
@@ -58,7 +58,7 @@
         }
       }
 
-      &.navigation-open #{map-get($settings, 'item')} {
+      .navigation-open & #{map-get($settings, 'item')} {
         opacity: 1;
         transform: none;
       }
@@ -68,6 +68,10 @@
   @at-root {
     body {
       margin-top: map-get($settings, 'height');
+
+      &.navigation-open {
+        overflow-y: hidden;
+      }
     }
   }
 }
