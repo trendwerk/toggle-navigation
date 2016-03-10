@@ -17,11 +17,13 @@
     @error '`height` should be set in toggle-navigation() arguments.';
   }
 
+  $speed: map-get($settings, 'speed');
+
   height: map-get($settings, 'height');
   overflow: hidden;
   position: absolute;
   top: 0;
-  transition: height map-get($settings, 'speed') cubic-bezier(0, 0, 0, 1);
+  transition: height $speed cubic-bezier(0, 0, 0, 1);
 
   &.navigation-open {
     height: 100%;
@@ -30,7 +32,7 @@
   #{map-get($settings, 'menu')} {
     left: 0;
     position: absolute;
-    transition: visibility 0s linear 1s;
+    transition: visibility 0s linear ($speed * 2);
     visibility: hidden;
 
     &.navigation-open {
@@ -44,13 +46,13 @@
       #{map-get($settings, 'item')} {
         opacity: 0;
         transform: scale(1.1) translateY(-20px);
-        transition: opacity map-get($settings, 'speed') ease-out, transform map-get($settings, 'speed') ease-out;
+        transition: opacity $speed ease-out, transform $speed ease-out;
 
         @for $i from 1 through $max-items {
-          $base-delay: (map-get($settings, 'speed') / 4);
+          $base-delay: ($speed / 4);
 
           &:nth-child(#{$i}) {
-            $item-delay: $base-delay + ($i * 50ms);
+            $item-delay: $base-delay + ($i * ($speed / 8));
             transition-delay: $item-delay, $item-delay;
           }
         }
