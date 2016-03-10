@@ -1,0 +1,6 @@
+{
+  "name": "toggle-navigation",
+  "dependencies": {
+    "jquery": "~2.2.0"
+  }
+}
