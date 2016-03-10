@@ -27,7 +27,7 @@
     $media-query: 'min-width: 0px';
   }
 
-  @include leuke-mixin($until) {
+  @media($media-query) {
     height: map-get($settings, 'height');
     overflow: hidden;
     position: absolute;
@@ -55,20 +55,26 @@
       }
 
       @if map-get($settings, 'item') {
-        $max-items: 10;
+        $max-items: 12;
 
         #{map-get($settings, 'item')} {
+          $base-delay: ($speed / 4);
+          $speed-increase: ($speed / 8);
+
           opacity: 0;
           transform: scale(1.1) translateY(-20px);
           transition: opacity $speed ease-out, transform $speed ease-out;
 
-          @for $i from 1 through $max-items {
-            $base-delay: ($speed / 4);
-
+          @for $i from 1 through ($max-items - 1) {
             &:nth-child(#{$i}) {
-              $item-delay: $base-delay + ($i * ($speed / 8));
+              $item-delay: $base-delay + ($i * $speed-increase);
               transition-delay: $item-delay, $item-delay;
             }
+          }
+
+          &:nth-child(n+#{$max-items}) {
+            $item-delay: $base-delay + ($max-items * $speed-increase);
+            transition-delay: $item-delay, $item-delay;
           }
         }
 
