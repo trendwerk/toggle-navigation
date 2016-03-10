@@ -39,19 +39,19 @@
     }
 
     @if map-get($settings, 'item') {
-      $maxItems: 10;
+      $max-items: 10;
 
       #{map-get($settings, 'item')} {
         opacity: 0;
         transform: scale(1.1) translateY(-20px);
         transition: opacity map-get($settings, 'speed') ease-out, transform map-get($settings, 'speed') ease-out;
 
-        @for $i from 1 through $maxItems {
-          $baseDelay: (map-get($settings, 'speed') / 4);
+        @for $i from 1 through $max-items {
+          $base-delay: (map-get($settings, 'speed') / 4);
 
           &:nth-child(#{$i}) {
-            $itemDelay: $baseDelay + ($i * 50ms);
-            transition-delay: $itemDelay, $itemDelay;
+            $item-delay: $base-delay + ($i * 50ms);
+            transition-delay: $item-delay, $item-delay;
           }
         }
       }
