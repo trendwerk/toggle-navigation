@@ -3,6 +3,7 @@
 /// @param {Map} $args - Settings
 @mixin toggle-navigation($args: ()) {
   $settings: map-merge((
+    'bottom-space': 40px,
     'item': null,
     'height': null,
     'menu': null,
@@ -30,8 +31,13 @@
   }
 
   #{map-get($settings, 'menu')} {
+    bottom: 0;
     left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: map-get($settings, 'bottom-space');
     position: absolute;
+    top: map-get($settings, 'height');
     transition: visibility 0s linear ($speed * 2);
     visibility: hidden;
 
