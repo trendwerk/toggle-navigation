@@ -3,6 +3,7 @@
 /// @param {Map} $args - Settings
 @mixin toggle-navigation($args: ()) {
   $settings: map-merge((
+    'background': null,
     'bottom-space': 40px,
     'item': null,
     'height': null,
@@ -36,7 +37,7 @@
     overflow: hidden;
     position: absolute;
     top: 0;
-    transition: height $speed cubic-bezier(0, 0, 0, 1);
+    transition: background $speed cubic-bezier(0, 0, 0, 1), height $speed cubic-bezier(0, 0, 0, 1);
 
     .admin-bar & {
       @each $width, $height in $wp-admin-bar {
@@ -47,6 +48,10 @@
     }
 
     .navigation-open & {
+      @if map-get($settings, 'background') {
+        background: map-get($settings, 'background');
+      }
+
       height: 100%;
     }
 
