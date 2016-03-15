@@ -10,9 +10,9 @@ bower install trendwerk/toggle-navigation#~0.1.0 --save
 Using `toggle-navigation` is a two-step process:
 
 1. SCSS: `@include` the mixin on your header. The header should contain your main navigation;
-2. JS: Initialize your toggle button (uses jQuery).
+2. JS: Initialize your toggle button.
 
-### Basic implementation
+### Minimal implementation
 
 ```scss
 @include toggle-navigation((
@@ -51,18 +51,18 @@ A more common setup is to include the `item` and `until` parameters:
 ```
 
 #### Background
-Set a background for the full screen navigation when opened.
+Background for the full screen navigation when opened.
 
 #### Bottom space
 The spacing below the main navigation.
 
-#### Height
+#### Height (required)
 The height of the header when the main navigation is closed. This is necessary to properly animate the opening of the header.
 
 #### Item
 The CSS selector of the items in the main navigation. Setting this option animates the menu items in sequence.
 
-#### Menu
+#### Menu (required)
 The CSS selector for the main navigation.
 
 #### Speed
