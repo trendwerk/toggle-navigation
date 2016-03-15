@@ -4,7 +4,7 @@
 @mixin toggle-navigation($args: ()) {
   $settings: map-merge((
     'background': null,
-    'bottom-space': 40px,
+    'bottom-space': 80px,
     'height': null,
     'item': null,
     'menu': null,
@@ -103,12 +103,16 @@
     }
 
     @at-root {
-      body {
-        margin-top: map-get($settings, 'height');
-
-        &.navigation-open {
+      html {
+        &.navigation-open,
+        &.navigation-open body {
+          height: 100%;
           overflow-y: hidden;
         }
+      }
+
+      body {
+        padding-top: map-get($settings, 'height');
       }
     }
   }
