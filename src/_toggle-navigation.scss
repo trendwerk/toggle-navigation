@@ -27,7 +27,7 @@
   );
 
   @if map-get($settings, 'until') {
-    $media-query: 'max-width: ' + map-get($settings, 'until');
+    $media-query: 'max-width: ' + (map-get($settings, 'until') - 1px);
   } @else {
     $media-query: 'min-width: 0px';
   }
