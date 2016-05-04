@@ -3,7 +3,7 @@ Full screen navigation with toggle.
 
 ## Install
 ```sh
-bower install trendwerk/toggle-navigation#~0.1.0 --save
+bower install trendwerk/toggle-navigation --save
 ```
 
 ## Usage
