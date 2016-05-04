@@ -26,6 +26,8 @@
     782px: 32px,
   );
 
+  $media-query: '';
+
   @if map-get($settings, 'until') {
     $media-query: 'max-width: ' + (map-get($settings, 'until') - 1px);
   } @else {
