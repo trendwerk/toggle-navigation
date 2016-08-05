@@ -39,7 +39,7 @@
     overflow: hidden;
     position: absolute;
     top: 0;
-    transition: background $speed cubic-bezier(0, 0, 0, 1), height $speed cubic-bezier(0, 0, 0, 1);
+    transition: background-color $speed cubic-bezier(0, 0, 0, 1), height $speed cubic-bezier(0, 0, 0, 1);
 
     .admin-bar & {
       @each $width, $height in $wp-admin-bar {
