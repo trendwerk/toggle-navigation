@@ -9,6 +9,6 @@
     "gulp-scss-lint": "^0.3.9"
   },
   "scripts": {
-    "postinstall": "gulp"
+    "start": "gulp"
   }
 }
