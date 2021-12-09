@@ -1,3 +1,5 @@
+@use "sass:math";
+
 /// Full screen toggle navigation
 ///
 /// @param {Map} $args - Settings
@@ -77,8 +79,8 @@
         $max-items: 12;
 
         #{map-get($settings, 'item')} {
-          $base-delay: ($speed / 4);
-          $speed-increase: ($speed / 8);
+          $base-delay: math.div($speed, 4);
+          $speed-increase: math.div($speed, 8);
 
           opacity: 0;
           transform: scale(1.1) translateY(-20px);
